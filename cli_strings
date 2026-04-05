@@ -1,0 +1,103 @@
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+func main() {
+	word := ""
+	operation := ""
+	var index int
+
+	for {
+		fmt.Println("Please input a word:")
+		fmt.Scan(&word)
+
+		fmt.Println("Choose operation:")
+		fmt.Println("(lastChar | capitalize | deleteIndex | firstUpper | lastUpper | firstLastUpper | firstChar)")
+		fmt.Scan(&operation)
+
+		switch operation {
+
+		case "lastChar":
+			fmt.Println(lastChar(word))
+
+		case "capitalize":
+			fmt.Println(capitalize(word))
+
+		case "deleteIndex":
+			fmt.Println("Provide the index to be deleted:")
+			fmt.Scan(&index)
+
+			if index < 0 || index >= len(word) {
+				fmt.Println("Index out of range")
+				continue
+			}
+			fmt.Println(deleteIndex(word, index))
+
+		case "firstUpper":
+			fmt.Println(firstUpper(word))
+
+		case "lastUpper":
+			fmt.Println(lastUpper(word))
+
+		case "firstLastUpper":
+			fmt.Println(firstLastUpper(word))
+
+		case "firstChar":
+			fmt.Println(firstChar(word))
+
+		default:
+			fmt.Println("Unknown command. Use a valid operation.")
+		}
+		break
+	}
+}
+
+func lastChar(str string) string {
+	if len(str) == 0 {
+		return ""
+	}
+	return str[len(str)-1:]
+}
+
+func capitalize(str string) string {
+	return strings.ToUpper(str)
+}
+
+func deleteIndex(str string, i int) string {
+	return str[:i] + str[i+1:]
+}
+
+func firstUpper(str string) string {
+	if len(str) == 0 {
+		return str
+	}
+	return strings.ToUpper(str[:1]) + str[1:]
+}
+
+func lastUpper(str string) string {
+	if len(str) == 0 {
+		return str
+	}
+	return str[:len(str)-1] + strings.ToUpper(str[len(str)-1:])
+}
+
+func firstLastUpper(str string) string {
+	if len(str) == 0 {
+		return str
+	}
+	if len(str) == 1 {
+		return strings.ToUpper(str)
+	}
+	return strings.ToUpper(str[:1]) + strings.ToLower(str[1:len(str)-1]) + strings.ToUpper(str[len(str)-1:])
+}
+
+func firstChar(str string) string {
+	if len(str) == 0 {
+		return ""
+	}
+	return str[:1]
+}
+
