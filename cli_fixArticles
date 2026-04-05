@@ -1,0 +1,64 @@
+package main
+
+import (
+	"fmt"
+	"bufio"
+	"strings"
+	"os"
+)
+
+func main(){
+	textReader := bufio.NewReader(os.Stdin)
+
+	fmt.Println("may i have your input please")
+
+	userInput, err := textReader.ReadString('\n')
+	if err != nil {
+		fmt.Println("Error:", err)
+	}
+	word := strings.Fields(userInput)
+	fix := fixArticles(word)
+	fmt.Println("fixed:", fix)
+
+}
+
+func fixArticles(text []string) string {
+	vowels := "aeiou"
+	for i := 0; i < len(text)-1; i++ {
+		curr := strings.ToLower(text[i])
+		if curr == "an" || curr == "a" {
+			next := strings.ToLower(strings.Trim(text[i+1], " "))
+
+			applyAn := false
+
+			if strings.Contains(vowels, string(next[0])) || 
+			strings.HasPrefix(next, "honor") || 
+			strings.HasPrefix(next, "honest") || 
+			strings.HasPrefix(next, "hour") {
+				applyAn = true
+			}
+
+			if strings.HasPrefix(next, "euro") || 
+			strings.HasPrefix(next, "univer") || 
+			strings.HasPrefix(next, "use") || 
+			strings.HasPrefix(next, "unit") {
+				applyAn = false
+			}
+
+			if text[i] >= "A" && text[i] <= "Z"{
+				if applyAn {
+					text[i] = "An"
+				}else{
+					text[i] = "A"
+				}
+			}else{
+				if applyAn{
+					text[i] = "an"
+				}else {
+					text[i] = "a"
+				}
+			}
+		}
+	}
+	return strings.Join(text, " ")
+}
