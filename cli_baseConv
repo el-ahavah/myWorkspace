@@ -1,0 +1,125 @@
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+func main() {
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Println("Type your text:")
+
+	input, _ := reader.ReadString('\n')
+	input = strings.TrimSpace(input)
+
+	words := strings.Fields(input)
+
+	var result []string
+
+	for i := 0; i < len(words); i++ {
+
+		if i+1 < len(words) && words[i+1] == "hex" {
+			converted := hexconv(words[i])
+			result = append(result, converted)
+			i++
+			continue
+		}
+
+		if i+1 < len(words) && words[i+1] == "bin" {
+			converted := binconv(words[i])
+			result = append(result, converted)
+			i++
+			continue
+		}
+
+		result = append(result, words[i])
+	}
+
+	fmt.Println(strings.Join(result, " "))
+}
+
+func hexconv(str string) string {
+	num, err := strconv.ParseInt(str, 16, 64)
+	if err != nil {
+		fmt.Println("Invalid hex:", str)
+		return str
+	}
+	return strconv.FormatInt(num, 10)
+}
+
+func binconv(str string) string {
+	num, err := strconv.ParseInt(str, 2, 64)
+	if err != nil {
+		fmt.Println("Invalid binary:", str)
+		return str
+	}
+	return strconv.FormatInt(num, 10)
+}
+
+// package main
+
+// import(
+// 	"fmt"
+// 	"os"
+// 	"bufio"
+// 	"strings"
+// 	"strconv"
+// )
+
+// func main() {
+// 	reader := bufio.NewReader(os.Stdin)
+// 	fmt.Println("type in your text please")
+
+// 	input, err := reader.ReadString('\n')
+// 	if err != nil {
+// 		fmt.Println("error reading input:", err)
+// 	}
+
+// 	input = strings.TrimSpace(input)
+// 	split := strings.Fields(input)
+
+// 	var final []string
+// 	var value string
+
+// 	for i := range split {
+// 		switch split[i] {
+
+// 		case "hex":
+// 			value = hexconv(value)
+
+// 		case "bin":
+// 			value = binconv(value)
+
+// 		default:
+// 			if value != "" {
+// 				final = append(final, value)
+// 			}
+// 			value = split[i]
+// 		}
+// 	}
+
+// 	if value != "" {
+// 		final = append(final, value)
+// 	}
+
+// 	fmt.Println(strings.Join(final, " "))
+// }
+
+// func hexconv(str string) string {
+// 	conv, err := strconv.ParseInt(str, 16, 64)
+// 	if err != nil {
+// 		fmt.Println("error converting hex:", err)
+// 	}
+// 	return strconv.FormatInt(conv, 10)
+// }
+
+// func binconv(str string)string{
+// 	conv, err := strconv.ParseInt(str, 2, 64)
+// 	if err != nil {
+// 		fmt.Println("error converting bin:", err)
+// 	}
+// 	return strconv.FormatInt(conv, 10)
+// }
