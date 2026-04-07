@@ -123,3 +123,55 @@ func binconv(str string) string {
 // 	}
 // 	return strconv.FormatInt(conv, 10)
 // }
+
+
+
+// With just a function
+
+package main
+
+// import (
+//     "bufio"
+//     "fmt"
+//     "os"
+//     "strconv"
+//     "strings"
+// )
+
+// func main() {
+//     toRead := bufio.NewReader(os.Stdin)
+//     fmt.Println("enter text to be converted")
+//     userInput, err := toRead.ReadString('\n')
+//     if err != nil {
+//         fmt.Println("Error", err)
+//     }
+//     userInput = strings.TrimSpace(userInput)
+//     userInput1 := strings.Fields(userInput)
+//     fmt.Println(ConvertNumbers(userInput1))
+// }
+
+// func ConvertNumbers(words []string) []string {
+
+//     for i := 0; i < len(words); i++ {
+//         if words[i] == "(hex)" {
+//             conv, err := strconv.ParseInt(words[i-1], 16, 64)
+//             if err != nil {
+//                 continue
+//             }
+//             words[i-1] = strconv.FormatInt(conv, 10)
+//             words = append(words[:i], words[i+1:]...)
+//             i--
+//         }
+
+//         if words[i] == "(bin)" {
+//             conv, err := strconv.ParseInt(words[i-1], 2, 64)
+//             if err != nil {
+//                 continue
+//             }
+//             words[i-1] = strconv.FormatInt(conv, 10)
+//             words = append(words[:i], words[i+1:]...)
+//             i--
+//         }
+//     }
+//     return words
+// }
