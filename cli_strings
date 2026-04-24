@@ -101,3 +101,40 @@ func firstChar(str string) string {
 	return str[:1]
 }
 
+/*
+Write a function that:
+
+1. Asks the user to input a word.
+2. Asks the user to select an operation by entering one of the following:
+   - `lastChar`
+   - `capitalize`
+   - `deleteIndex`
+   - `firstUpper`
+   - `lastUpper`
+   - `firstLastUpper`
+   - `firstChar`
+
+## Operations
+
+**`lastChar`**
+Returns the last character of the word.
+
+**`capitalize`**
+Returns the word with every letter capitalized.
+
+**`deleteIndex`**
+Prompts the user to input an index. Deletes the character at that index and returns the result.
+If the index is greater than or equal to the length of the word, display an error message and restart from the beginning.
+
+**`firstUpper`**
+Returns the word with the first character uppercased.
+
+**`lastUpper`**
+Returns the word with the last character uppercased.
+
+**`firstLastUpper`**
+Returns the word with the first and last characters uppercased.
+
+**`firstChar`**
+Returns the first character of the word.
+*/
